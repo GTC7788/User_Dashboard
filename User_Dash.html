@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8"> 
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="style.css">
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  		<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  		<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        	
+	</head>
+	<body>
+		<div class="container navigation_bar">
+			<div class="row top">             
+				<div class="col-sm-6 title">
+					My MammalWeb
+				</div>
+				<div class="col-sm-2"></div>
+				<div class="col-sm-1">	
+					<a href="http://community.dur.ac.uk/a.j.dunnings/MammalWeb/home.html">
+						<button type="button" class="btn btn-danger" id="home">HOME</button>
+					</a>
+				</div>
+				<div class="col-sm-1">	
+					<div class="dropdown">
+					  <button class="btn btn-danger dropdown-toggle" type="button" data-toggle="dropdown">USER
+					  <span class="caret"></span></button>
+					  <ul class="dropdown-menu">
+						<li><a href="http://community.dur.ac.uk/a.j.dunnings/MammalWeb/user.html">Main Page</a></li>
+						<li><a href="http://community.dur.ac.uk/tiancheng.guo/User_Dash/User_Dash.html">My MammalWeb</a></li>
+						<li><a href="http://community.dur.ac.uk/a.j.dunnings/MammalWeb/slideshow.html">Slideshow</a></li>
+					  </ul>
+					</div>
+				</div>
+				<div class="col-sm-1">	
+					<div class="dropdown">
+					  <button class="btn btn-danger dropdown-toggle" type="button" data-toggle="dropdown">ADMIN
+					  <span class="caret"></span></button>
+					  <ul class="dropdown-menu">
+						<li><a href="http://community.dur.ac.uk/a.j.dunnings/MammalWeb/admin.html">Main Page</a></li>
+						<li><a href="http://community.dur.ac.uk/a.j.dunnings/MammalWeb/back_end.html">CSV Download</a></li>
+						<li><a href="http://community.dur.ac.uk/a.j.dunnings/MammalWeb/algorithm.html">Algorithm</a></li>
+						<li><a href="http://community.dur.ac.uk/a.j.dunnings/MammalWeb/gold_standard.html">Gold Standard</a></li>
+						<li><a href="http://community.dur.ac.uk/matthew.stobbs/MammalWeb/">Visual Data</a></li>
+
+					  </ul>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class = "container" style="margin-top:10px;margin-bottom:15px">
+			<div class = "row">
+			<div class="col-sm-3">
+				<table>
+					<tr><td>UserID:</td><td><input class="form-control" type="text" id = "userid" name="admin"/></td>
+						<td>&nbsp;&nbsp;&nbsp;</td><td><input class="btn btn-danger" id = "go" type="submit" value="Go" onclick="showDiv()"/></td><td>
+						
+					</td></tr>
+
+				</table>
+			<!-- </form> -->
+			</div>
+			</div>
+		</div>
+
+
+
+
+<!-- ************************************************************* -->
+    <!-- Aera to show classification images and associated filter criteria -->
+<!-- ************************************************************* -->
+
+		<div class="container" >
+			
+			<div class="row">
+				<div id="response"></div>
+			</div>
+
+
+			<div class="container" id="filterClassified" style="display:none">
+			<div class="row">
+				<h5>Filter criteria for Classification images:</h5>
+			</div>
+			<div class="container row1">
+			<div class="row">
+				<!-- <div class="col-sm-2" style="font-size:80%">
+					UserID:<input type="text" id="userid" class="form-control">
+				</div> -->
+				<div class="col-sm-2" style="font-size:120%">
+					Species:
+					<select id="formSpecies" class="form-control" style="font-size:80%">
+					  <option value="Any">Any</option>
+					  <option value="Badger">Badger</option>
+					  <option value="Blackbird">Blackbird</option>
+					  <option value="Domestic_Cat">Domestic Cat</option>
+					  <option value="Domestic_Dog">Domestic Dog</option>
+					  <option value="Grey_Squirrel">Grey Squirrel</option>
+					  <option value="Horse">Horse</option>
+					  <option value="Magpie">Magpie</option>
+					  <option value="Rabbit">Rabbit</option>
+					  <option value="Red_Fox">Red Fox</option>
+					  <option value="Roe_Deer">Roe Deer</option>
+					  <option value="Stoat_or_Weasel">Stoat or Weasel</option>
+					  <option value="Woodpigeon">Woodpigeon</option>
+					  <option value="Muntjac">Muntjac</option>
+					  <option value="Brown_Hare">Brown Hare</option>
+					  <option value="Hedgehog">Hedgehog</option>
+					  <option value="Red_Deer">Red Deer</option>
+					  <option value="Fallow_Deer">Fallow Deer</option>
+					  <option value="Mountain_Hare">Mountain Hare</option>
+					  <option value="Small_Rodent">Small Rodent</option>
+					  <option value="Livestock">Livestock</option>
+					  <option value="Pine_Marten">Pine Marten</option>
+					  <option value="Red_Squirrel">Red Squirrel</option>
+					  <option value="Otter">Otter</option>
+					  <option value="Nothing">Nothing</option>
+					  <option value="Don't_know">Don't know</option>
+					  <option value="Mink">Mink</option>
+					  <option value="Human">Human</option>
+					</select>
+				</div>
+				<div class="col-sm-2" style="font-size:120%">
+					Gender:
+					<select id="formGender" class=form-control style="font-size:80%">
+						<option value="Any">Any</option>
+						<option value="Male">Male</option>
+						<option value="Female">Female</option>
+					</select>
+				</div>
+
+				<div class="col-sm-2" style="font-size:120%">
+					Age:
+					<select id="formAge" class=form-control style="font-size:80%">
+						<option value="Any">Any</option>
+						<option value="Adult">Adult</option>
+						<option value="Juvenile">Juvenile</option>
+					</select>
+				</div>				
+		</div>
+
+		<div class="container" style="font-size:120%">
+			<div class="row">
+				<div class="col-sm-1 fromTo" style="margin-left:-15px;">
+					<div>&nbsp;</div>FROM
+				</div>
+				<div class="col-sm-1">
+					Day:<input type="text" id="dayFrom" class="form-control">
+				</div>
+				<div class="col-sm-1">
+					Month:<input type="text" id="monthFrom" class="form-control">
+				</div>
+				<div class="col-sm-1">
+					Year:<input type="text" id="yearFrom" class="form-control">
+				</div>
+				<div class="col-sm-1 fromTo">
+					<div>&nbsp;</div>TO
+				</div>
+				<div class="col-sm-1">
+					Day:<input type="text" id="dayTo" class="form-control">
+				</div>
+				<div class="col-sm-1">
+					Month:<input type="text" id="monthTo" class="form-control">
+				</div>
+				<div class="col-sm-1">
+					Year:<input type="text" id="yearTo" class="form-control">
+				</div>
+				</div>
+			</div>
+
+			<div class="row" style="font-size:120%">
+				<div class="col-sm-1 fromTo">
+					<div>&nbsp;</div>FROM
+				</div>
+				<div class="col-sm-1 form-group">
+					Hour:<input type="text" id="hourFrom" class="form-control">
+				</div>
+				<div class="col-sm-1 form-group">
+					Min:<input type="text" id="minFrom" class="form-control">
+				</div>
+				<div class="col-sm-1 fromTo">
+					<div>&nbsp;</div>TO
+				</div>
+				<div class="col-sm-1 form-group">
+					Hour:<input type="text" id="hourTo" class="form-control">
+				</div>
+				<div class="col-sm-1 form-group">
+					Min:<input type="text" id="minTo" class="form-control">
+				</div>
+			</div>
+
+			<div class="container" style = "font-size:80%">
+			<div class="row">
+				<div class="col-sm-2">
+					<button type="button" class="btn btn-danger" id="format_file">Update Table</button>
+				</div>
+				<div class="col-sm-2">
+					<button type="button" class="btn btn-danger" id="reset">Reset criteria</button>
+				</div>
+			</div>
+		</div>
+
+
+		<div class = "row">
+			<img src = "square-dotted-red.png" style = "width:80%; height:20px">
+		</div>
+
+
+<!-- ************************************************************* -->
+    <!-- Aera to show uploaded images and associated filter criteria -->
+<!-- ************************************************************* -->
+
+			<div class = "row" style="margin-top:25px;margin-bottom:0px;font-size:105%">
+				<div id="responseTwo" style="margin-left:-20px"></div>
+			</div>
+
+			<div class="container" id="filterUploaded" style="display:none">
+			<div class="row">
+				<h5>Filter criteria for Updated images:</h5>
+			</div>
+			<div class="container row1">
+
+		<div class="container" style="font-size:120%">
+			<div class="row">
+				<div class="col-sm-1 fromTo" style="margin-left:-15px;">
+					<div>&nbsp;</div>FROM
+				</div>
+				<div class="col-sm-1">
+					Day:<input type="text" id="dayFrom_uploaded" class="form-control">
+				</div>
+				<div class="col-sm-1">
+					Month:<input type="text" id="monthFrom_uploaded" class="form-control">
+				</div>
+				<div class="col-sm-1">
+					Year:<input type="text" id="yearFrom_uploaded" class="form-control">
+				</div>
+				<div class="col-sm-1 fromTo">
+					<div>&nbsp;</div>TO
+				</div>
+				<div class="col-sm-1">
+					Day:<input type="text" id="dayTo_uploaded" class="form-control">
+				</div>
+				<div class="col-sm-1">
+					Month:<input type="text" id="monthTo_uploaded" class="form-control">
+				</div>
+				<div class="col-sm-1">
+					Year:<input type="text" id="yearTo_uploaded" class="form-control">
+				</div>
+				</div>
+			</div>
+
+			<div class="row" style="font-size:120%">
+				<div class="col-sm-1 fromTo">
+					<div>&nbsp;</div>FROM
+				</div>
+				<div class="col-sm-1 form-group">
+					Hour:<input type="text" id="hourFrom_uploaded" class="form-control">
+				</div>
+				<div class="col-sm-1 form-group">
+					Min:<input type="text" id="minFrom_uploaded" class="form-control">
+				</div>
+				<div class="col-sm-1 fromTo">
+					<div>&nbsp;</div>TO
+				</div>
+				<div class="col-sm-1 form-group">
+					Hour:<input type="text" id="hourTo_uploaded" class="form-control">
+				</div>
+				<div class="col-sm-1 form-group">
+					Min:<input type="text" id="minTo_uploaded" class="form-control">
+				</div>
+
+				<div class="col-sm-2 form-group">
+					Site ID (if you know):<input type="text" id="site_id" class="form-control">
+				</div>
+
+
+			</div>
+
+			<div class="container" style = "font-size:120%">
+			<div class="row">
+				<div class="col-sm-2">
+					<button type="button" class="btn btn-danger" id="format_file_uploaded">Update Table</button>
+				</div>
+				<div class="col-sm-2" style = "margin-bottom:30px">
+					<button type="button" class="btn btn-danger" id="reset_uploaded">Reset criteria</button>
+				</div>
+			</div>
+		</div>
+
+<!-- ************************************************************* -->
+    <!-- Aera to show user liked images  -->
+<!-- ************************************************************* -->
+
+		<div class = "row" style="margin-left:-20px; margin-bottom:30px">
+			<img src = "square-dotted-red.png" style = "width:80%; height:20px">
+		</div>
+
+		<div class="row">
+				<div id="responseThree" style = "margin-left:-60px" ></div>
+		</div>
+
+
+
+
+	</div>
+
+</div>
+
+
+<!-- The web page is splited into two separate pages. The first half will show 
+the classified images by this user. The second half will show the uploaded
+images by this user. -->
+
+		<script>
+			$("#go").click(function() {
+				var input = document.getElementById('userid').value;
+				if(isNaN(input)){
+					window.alert("Please enter a number");
+				}
+
+				if(document.getElementById('userid').value){
+					$q = "";
+					$q = document.getElementById('userid').value;
+				} else{
+					window.alert("Please enter a UserID");
+				}
+				
+				
+				$("#response").load('User_Classified.php?q='+$q);
+				$("#responseTwo").load('User_Uploaded.php?q='+$q);
+				$("#responseThree").load('User_Liked.php?q='+$q);
+			});
+
+			// The criteria div are hided before user enter a user ID. 
+			function showDiv() {
+				document.getElementById('filterClassified').style.display = "block";
+				document.getElementById('filterUploaded').style.display = "block";
+			}
+		</script>
+
+
+		<script>
+
+		//To gather the criterias entered by user and send them to the server. Because there are
+		//two citeria 'update' buttons, one for classified images and one for uploaded images, therefore, 
+		//seperate the operations for each part, but the code are similar.
+			
+		$("#format_file").click(function() {
+		$q = "";
+		$q = $q + $('#formSpecies').val() + ",";
+		$q = $q + $('#formGender').val() + ",";
+		$q = $q + $('#formAge').val() + ",";
+
+		if (document.getElementById('dayFrom').value) {
+			$q = $q + document.getElementById('dayFrom').value + ",";
+		} else {
+			$q = $q + "-,"
+		}
+		if (document.getElementById('monthFrom').value) {
+			$q = $q + document.getElementById('monthFrom').value + ",";
+		} else {
+			$q = $q + "-,"
+		}
+		if (document.getElementById('yearFrom').value) {
+			$q = $q + document.getElementById('yearFrom').value + ",";
+		} else {
+			$q = $q + "-,"
+		}
+
+		if (document.getElementById('dayTo').value) {
+			$q = $q + document.getElementById('dayTo').value + ",";
+		} else {
+			$q = $q + "-,"
+		}
+		if (document.getElementById('monthTo').value) {
+			$q = $q + document.getElementById('monthTo').value + ",";
+		} else {
+			$q = $q + "-,"
+		}
+		if (document.getElementById('yearTo').value) {
+			$q = $q + document.getElementById('yearTo').value + ",";
+		} else {
+			$q = $q + "-,"
+		}
+
+		if (document.getElementById('hourFrom').value) {
+			$q = $q + document.getElementById('hourFrom').value + ",";
+		} else {
+			$q = $q + "-,"
+		}
+		if (document.getElementById('minFrom').value) {
+			$q = $q + document.getElementById('minFrom').value + ",";
+		} else {
+			$q = $q + "-,"
+		}
+		if (document.getElementById('hourTo').value) {
+			$q = $q + document.getElementById('hourTo').value + ",";
+		} else {
+			$q = $q + "-,"
+		}
+		if (document.getElementById('minTo').value) {
+			$q = $q + document.getElementById('minTo').value + ",";
+		} else {
+			$q = $q + "-,"
+		}
+
+		if(document.getElementById('userid').value){
+			$q = $q + document.getElementById('userid').value + ",";
+		} else{
+			$q = $q + "-,"
+		}
+
+		$("#response").load('User_Classified.php?i='+$q);
+
+	});
+
+
+	$("#format_file_uploaded").click(function() {
+		$r = "";
+
+		if (document.getElementById('dayFrom_uploaded').value) {
+			$r = $r + document.getElementById('dayFrom_uploaded').value + ",";
+		} else {
+			$r = $r + "-,"
+		}
+		if (document.getElementById('monthFrom_uploaded').value) {
+			$r= $r + document.getElementById('monthFrom_uploaded').value + ",";
+		} else {
+			$r = $r + "-,"
+		}
+		if (document.getElementById('yearFrom_uploaded').value) {
+			$r = $r + document.getElementById('yearFrom_uploaded').value + ",";
+		} else {
+			$r = $r + "-,"
+		}
+
+		if (document.getElementById('dayTo_uploaded').value) {
+			$r = $r + document.getElementById('dayTo_uploaded').value + ",";
+		} else {
+			$r = $r + "-,"
+		}
+		if (document.getElementById('monthTo_uploaded').value) {
+			$r = $r + document.getElementById('monthTo_uploaded').value + ",";
+		} else {
+			$r = $r + "-,"
+		}
+		if (document.getElementById('yearTo_uploaded').value) {
+			$r = $r + document.getElementById('yearTo_uploaded').value + ",";
+		} else {
+			$r = $r + "-,"
+		}
+
+		if (document.getElementById('hourFrom_uploaded').value) {
+			$r = $r + document.getElementById('hourFrom_uploaded').value + ",";
+		} else {
+			$r = $r + "-,"
+		}
+		if (document.getElementById('minFrom_uploaded').value) {
+			$r = $r + document.getElementById('minFrom_uploaded').value + ",";
+		} else {
+			$r = $r + "-,"
+		}
+		if (document.getElementById('hourTo_uploaded').value) {
+			$r = $r + document.getElementById('hourTo_uploaded').value + ",";
+		} else {
+			$r = $r + "-,"
+		}
+		if (document.getElementById('minTo_uploaded').value) {
+			$r = $r + document.getElementById('minTo_uploaded').value + ",";
+		} else {
+			$r = $r + "-,"
+		}
+
+		if (document.getElementById('site_id').value) {
+			$r = $r + document.getElementById('site_id').value + ",";
+		} else {
+			$r = $r + "-,"
+		}
+
+		if(document.getElementById('userid').value){
+			$r = $r + document.getElementById('userid').value + ",";
+		} else{
+			$r = $r + "-,"
+		}
+		$("#responseTwo").load('User_Uploaded.php?i='+$r);
+	});
+		
+		
+		</script>
+
+	<script>
+
+	//Reset the criterias
+
+		$("#reset").click(function() {
+			document.getElementById('formSpecies').value = 'Any';
+			document.getElementById('formGender').value = 'Any';
+			document.getElementById('formAge').value = 'Any';
+			document.getElementById('dayFrom').value = "";
+			document.getElementById('monthFrom').value = "";
+			document.getElementById('yearFrom').value = "";
+			document.getElementById('dayTo').value = "";
+			document.getElementById('monthTo').value = "";
+			document.getElementById('yearTo').value = "";
+			document.getElementById('hourFrom').value = "";
+			document.getElementById('minFrom').value = "";
+			document.getElementById('hourTo').value = "";
+			document.getElementById('minTo').value = "";
+		});
+
+		$("#reset_uploaded").click(function() {
+
+			document.getElementById('dayFrom_uploaded').value = "";
+			document.getElementById('monthFrom_uploaded').value = "";
+			document.getElementById('yearFrom_uploaded').value = "";
+			document.getElementById('dayTo_uploaded').value = "";
+			document.getElementById('monthTo_uploaded').value = "";
+			document.getElementById('yearTo_uploaded').value = "";
+			document.getElementById('hourFrom_uploaded').value = "";
+			document.getElementById('minFrom_uploaded').value = "";
+			document.getElementById('hourTo_uploaded').value = "";
+			document.getElementById('minTo_uploaded').value = "";
+		});
+	
+	</script>
+	</body>
+
+</html>
+
