@@ -14,3 +14,6 @@ Results will send back to the page.
 
 Some important data are then shown in the table, and by click on the 'View' button, user would able to 
 see the specific image.
+
+There is a Filter embeded under each section and it is convenient for users to input some criterias and screen/minimize 
+the returned data.
